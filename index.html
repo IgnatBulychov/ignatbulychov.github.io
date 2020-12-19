@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+
+    <title>CN</title>
+  </head>
+  <body>
+    <div id="app">
+      <v-app>
+      <div class="container-fluid mx-2">
+        <div class="row">
+          <div class="col-12 text-center">
+            <v-btn @click="showGame()" class="mb-1"  x-small
+            color="indigo accent-1"
+            dark>
+              <strong>Показать раскладку</strong>
+            </v-btn>  
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-2 text-center" v-for="(word,key) in words" :key="key">
+              <transition
+                name="custom-classes-transition"
+                enter-active-class="animated flipInX"
+                leave-active-class="animated flipOutX"  mode="out-in"
+              >
+                <v-card v-if="word.showNew" class="custom py-3 my-1 " :color="word.color">
+                  <v-card-text class="white--text">
+                    <h2>{{word.text}}</h2>
+                  </v-card-text>
+                </v-card>  
+              </transition>
+              
+              <transition
+                name="custom-classes-transition"
+                enter-active-class="animated flipInX"
+                leave-active-class="animated flipOutX"  mode="out-in"
+              >
+                <v-card  v-if="word.showOld" @click="showCard(key)" class="custom py-3 my-1" >
+                  <v-card-text >
+                    <h2>{{word.text}}</h2>
+                  </v-card-text>
+                </v-card> 
+              </transition>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-6 text-center"> 
+            <v-chip
+              v-for="n in 14" :key="n"
+              class="ma-1"
+              :color="n-1 < primaryCount ? 'blue' : 'dark'"
+              text-color="white"
+            >
+              {{n}}
+            </v-chip>      
+          </div>
+          <div class="col-6 text-center">
+            <v-chip
+              v-for="n in 14" :key="n"
+              class="ma-1"
+              :color="n-1 < successCount ? 'green' : 'dark'"
+              text-color="white"
+            >
+              {{n}}
+            </v-chip>
+          </div>
+        </div>
+      </div>
+      </v-app>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="app.js" type="text/javascript"></script>
+  </body>
+</html>
